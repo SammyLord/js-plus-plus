@@ -1,5 +1,5 @@
 //Created by Samuel Lord (NodeMixaholic/Sparksammy)
-//Licensed under MIT with <3
+//Licensed under Samuel Public License with <3
 
 //Just like readTextFile("path/to/file.txt"); except based off of the WWW and needs a full URL. Also: requires JQuery
 var litext;
