@@ -28,9 +28,9 @@ var urlParams = new URLSearchParams(window.location.search); // Added, just in c
 //Example: readTextFile("path/to/file.txt");
 function readTextFile(file) {
     file = file.toString();
-    var file2read = new File([""], file);
-    var reader = new FileReader();
-    var lastReadOutput = reader.readAsText(file2read, "UTF-8");
+    let file2read = new File([""], file);
+    let reader = new FileReader();
+    let lastReadOutput = reader.readAsText(file2read, "UTF-8");
     return lastReadOutput;
   }
 var varifyOutput = "";
@@ -41,9 +41,9 @@ function varify(value) {
 //Example: readDataFile("path/to/file.txt");
 function readDataFile(file) {
     file = file.toString();
-    var file2read = new File([""], file);
-    var reader = new FileReader();
-    var lastReadOutput = reader.readAsDataURL(file2read);
+    let file2read = new File([""], file);
+    let reader = new FileReader();
+    let lastReadOutput = reader.readAsDataURL(file2read);
     return lastReadOutput;
 }
 
@@ -56,15 +56,15 @@ function overwriteBody(html) {
 }
 
 function randomPOS(elementID) {
-  var top=Math.floor(Math.random() * Math.floor(90));             
-  var left=Math.floor(Math.random() * Math.floor(90));                    
+  let top=Math.floor(Math.random() * Math.floor(90));             
+  let left=Math.floor(Math.random() * Math.floor(90));                    
   document.getElementById(elementID.toString).style.top=top+"%";                   
   document.getElementById(elementID.toString).style.left=left+"%"
 }
 
 function pos(elementID,x,y) {
-  var top=y;             
-  var left=x;                    
+  let top = y;             
+  let left = x;                    
   document.getElementById(elementID.toString).style.top=top+"%";                   
   document.getElementById(elementID.toString).style.left=left+"%"
 }
@@ -74,8 +74,8 @@ function pos(elementID,x,y) {
 function randomSelectArray(avar){ 
   var isarray = Array.isArray(avar)
   if (isarray == true) {
-    var rnfa = Math.floor(Math.random()*avar.length);
-    var rrfa = avar[rnfa]
+    let rnfa = Math.floor(Math.random()*avar.length);
+    rrfa = avar[rnfa]
     return rrfa;
   } else if (isarray == false){
     console.log(`Error, ${avar} is not a Array...`);
@@ -186,7 +186,7 @@ function addToList(listID, jsArray) {
 // Gets the value of a attribute
 // Example: getAttribute(document.getElementById("link"), "href");
 function getAttribute(el, att) {
-  var result = el.getAttribute(att);
+  let result = el.getAttribute(att);
   return result;
 }
 
@@ -202,8 +202,8 @@ function hideShow(el) {
 
 // Example: fadeOut(el, 1000)
 function fadeOut(el, ms) {
-  elem = getElementById(el)
-  ms = parseInt(ms);
+  let elem = getElementById(el)
+  let ms = parseInt(ms);
   for (i = 0; i < (ms + 1); i++) {
     elem.style.opacity = elem.style.opacity - (i / 100);
     sleep(1)
@@ -231,31 +231,31 @@ function spin(el, ms){
 //Eval alternative
 //Example: exec("alert('Hello, world!')")
 function exec(jsCode) {
-  js = jsCode.toString()
+  let js = jsCode.toString()
   setTimeout( js, 1);
 }
 
-function requir3(jsFile) {
-  var req = readInternetText();
-  exec(readInternetText);
+function requir3(jsURL) {
+  let req = readInternetText(jsURL);
+  exec(req);
 }
 
 // Example: getFileSize(path/to/file)
 function getFileSize(file) {
   file = file.toString();
-  var file = new File([""], file);
+  file = new File([""], file);
   return file.getFileSize;
 }
 
 function lastModified(file) {
   file = file.toString();
-  var file = new File([""], file);
+  file = new File([""], file);
   return file.lastModified;
 }
 
 // Example: playAudio("https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3", 0.4)
 function playAudio(audio, speed) {
-  var ma = new Audio(audio);
+  let ma = new Audio(audio);
   ma.playbackRate = speed;
   ma.play()
 }
