@@ -2,28 +2,23 @@
 //Licensed under Samuel Public License with <3
 
 //Just like readTextFile("path/to/file.txt"); except based off of the WWW and needs a full URL. Also: requires JQuery
-var litext;
-var itext = "";
+var litext = "";
 function returner(valueToReturn) {
   return valueToReturn;
 }
 
 function readInternetText(url) {
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-    src = request.responseText;
-    itext += src;
-    setTimeout("return itext", 13);
-  }
-
-  request.open("GET", url, true);
-
-  request.send();
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            litext += request.responseText;
+        }
+    }
+    request.open("GET", url, true);
+    request.send();
 }
 
-
 var urlParams = new URLSearchParams(window.location.search); // Added, just in case someone wants to do something to the urlparams
-
 
 //Example: readTextFile("path/to/file.txt");
 function readTextFile(file) {
@@ -32,7 +27,8 @@ function readTextFile(file) {
     let reader = new FileReader();
     let lastReadOutput = reader.readAsText(file2read, "UTF-8");
     return lastReadOutput;
-  }
+}
+
 var varifyOutput = "";
 function varify(value) {
   varifyOutput = value;
@@ -48,43 +44,42 @@ function readDataFile(file) {
 }
 
 function writeToBody(html) {
-    document.append(html.toString())
+    document.body.innerHTML += html.toString();
 }
 
 function overwriteBody(html) {
-    document.body.innerHTML = html.toString()
+    document.body.innerHTML = html.toString();
 }
 
 function randomPOS(elementID) {
   let top=Math.floor(Math.random() * Math.floor(90));             
   let left=Math.floor(Math.random() * Math.floor(90));                    
-  document.getElementById(elementID.toString).style.top=top+"%";                   
-  document.getElementById(elementID.toString).style.left=left+"%"
+  document.getElementById(elementID).style.top=top+"%";                   
+  document.getElementById(elementID).style.left=left+"%"
 }
 
 function pos(elementID,x,y) {
   let top = y;             
   let left = x;                    
-  document.getElementById(elementID.toString).style.top=top+"%";                   
-  document.getElementById(elementID.toString).style.left=left+"%"
+  document.getElementById(elementID).style.top=top+"%";                   
+  document.getElementById(elementID).style.left=left+"%"
 }
 
-// Selects a random value in a array
+// Selects a random value in an array
 // Example: randomSelectArray(Array); (Change the array!)
 function randomSelectArray(avar){ 
-  var isarray = Array.isArray(avar)
+  var isarray = Array.isArray(avar);
   if (isarray == true) {
     let rnfa = Math.floor(Math.random()*avar.length);
-    rrfa = avar[rnfa]
+    rrfa = avar[rnfa];
     return rrfa;
   } else if (isarray == false){
-    console.log(`Error, ${avar} is not a Array...`);
+    console.log(`Error, ${avar} is not an Array...`);
   }
 }
 
-
 function sleep(ms) {
-  setTimeout(function () {}, ms)
+  setTimeout(function () {}, ms);
 }
 
 async function asyncSleep(ms) {
@@ -102,88 +97,87 @@ function isFunction(item) {
 }
 
 function applyCSS(elemID, prop, value) {
-    let e = document.getElementById(elemID)
-    e.style[prop] = value
+    let e = document.getElementById(elemID);
+    e.style[prop] = value;
 }
 
 function createParagraph(elementID) {
-    let e = document.createElement("p")
-    e.setAttribute("id", elementID)
-    document.body.appendChild(e)
+    let e = document.createElement("p");
+    e.setAttribute("id", elementID);
+    document.body.appendChild(e);
 }
 
 function createHeader(num, elementID) {
-    let e = document.createElement(`h${num}`)
-    e.setAttribute("id", elementID)
-    document.body.appendChild(e)
+    let e = document.createElement(`h${num}`);
+    e.setAttribute("id", elementID);
+    document.body.appendChild(e);
 }
 
 function createElement(tagName, elementID) {
-    let e = document.createElement(tagName)
-    e.setAttribute("id", elementID)
-    document.body.appendChild(e)
+    let e = document.createElement(tagName);
+    e.setAttribute("id", elementID);
+    document.body.appendChild(e);
 }
 
 function alignSelf(elemID, alignDirection) {
-    let e = document.getElementById(elemID)
-    e.style.alignSelf = alignDirection
+    let e = document.getElementById(elemID);
+    e.style.alignSelf = alignDirection;
 }
 
 function alignContent(elemID, alignDirection) {
-    let e = document.getElementById(elemID)
-    e.style.alignContent = alignDirection
+    let e = document.getElementById(elemID);
+    e.style.alignContent = alignDirection;
 }
 
 function alignAll(elemID, alignDirection) {
-    alignSelf(elemID, alignDirection)
-    alignContent(elemID, alignDirection)
+    alignSelf(elemID, alignDirection);
+    alignContent(elemID, alignDirection);
 }
 
 function writeTimeAndDate(elemID, hourFormat) {
-    let e = document.getElementById(elemID)
-    let d = new Date()
-    let locale = "en-GB"
+    let e = document.getElementById(elemID);
+    let d = new Date();
+    let locale = "en-GB";
     if (hourFormat == 24) {
-        locale = locale //leave it the same.
+        locale = locale; //leave it the same.
     } else {
-        locale = "en-US"
+        locale = "en-US";
     } 
-    let tdStr = d.toLocaleString(locale)
-    e.innerText = tdStr 
+    let tdStr = d.toLocaleString(locale);
+    e.innerText = tdStr;
 }
 
 function writeText(elemID, str) {
-    let e = document.getElementById(elemID)
-    e.innerText = String(str) 
+    let e = document.getElementById(elemID);
+    e.innerText = String(str);
 }
 
 function writeHTML(elemID, str) {
-    let e = document.getElementById(elemID)
-    e.innerHTML = String(str) 
+    let e = document.getElementById(elemID);
+    e.innerHTML = String(str);
 }
 
 function clearPage() {
-    document.body.innerHTML = ""
+    document.body.innerHTML = "";
 }
 
 function createList(listID, jsArray) {
-    let listParent = document.createElement("ul")
-    listParent.setAttribute("id", listID)
-    document.body.appendChild(listParent)
+    let listParent = document.createElement("ul");
+    listParent.setAttribute("id", listID);
+    document.body.appendChild(listParent);
     jsArray.forEach(item => {
-        listParent.innerHTML = listParent.innerHTML + `<li>${item}</li>`
-    })
+        listParent.innerHTML += `<li>${item}</li>`;
+    });
 }
 
 function addToList(listID, jsArray) {
-    let listParent = document.getElementById(listID)
+    let listParent = document.getElementById(listID);
     jsArray.forEach(item => {
-        listParent.innerHTML = listParent.innerHTML + `<li>${item}</li>`
-    })
+        listParent.innerHTML += `<li>${item}</li>`;
+    });
 }
 
-
-// Gets the value of a attribute
+// Gets the value of an attribute
 // Example: getAttribute(document.getElementById("link"), "href");
 function getAttribute(el, att) {
   let result = el.getAttribute(att);
@@ -202,37 +196,37 @@ function hideShow(el) {
 
 // Example: fadeOut(el, 1000)
 function fadeOut(el, ms) {
-  let elem = getElementById(el)
-  let ms = parseInt(ms);
+  let elem = getElementById(el);
+  ms = parseInt(ms);
   for (i = 0; i < (ms + 1); i++) {
-    elem.style.opacity = elem.style.opacity - (i / 100);
-    sleep(1)
+    elem.style.opacity -= (i / 100);
+    sleep(1);
   }
 }
 
 // Example: fadeIn(el, 1000);
 function fadeIn(el, ms) {
-  elem = getElementById(el)
+  elem = getElementById(el);
   elem.style.opacity = 0;
   ms = parseInt(ms);
   for (i = 0; i < (ms + 1); i++) {
-    elem.style.opacity = elem.style.opacity + (i / 100);
-    sleep(1)
+    elem.style.opacity += (i / 100);
+    sleep(1);
   }
 }
+
 function spin(el, ms){
-  elem = getElementById(el)
+  elem = getElementById(el);
   for (i = 0; i < (ms / 360); i++) {
     elem.style.transform = 'rotate(' + i + 'deg)';
   }
 }
 
-
 //Eval alternative
 //Example: exec("alert('Hello, world!')")
 function exec(jsCode) {
-  let js = jsCode.toString()
-  setTimeout( js, 1);
+  let js = jsCode.toString();
+  setTimeout(js, 1);
 }
 
 function requir3(jsURL) {
@@ -257,12 +251,10 @@ function lastModified(file) {
 function playAudio(audio, speed) {
   let ma = new Audio(audio);
   ma.playbackRate = speed;
-  ma.play()
+  ma.play();
 }
 
 // Example: redir(url);
 function redir(url) {
   window.location.href = url.toString();
 }
-
-
