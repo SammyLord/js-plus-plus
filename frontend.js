@@ -247,7 +247,7 @@ function lastModified(file) {
   return file.lastModified;
 }
 
-// Example: playAudio("https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3", 0.4)
+// Example: playAudio("https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3", 0.4); 
 function playAudio(audio, speed) {
   let ma = new Audio(audio);
   ma.playbackRate = speed;
