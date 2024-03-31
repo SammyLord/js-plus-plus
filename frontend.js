@@ -24,10 +24,19 @@ function createParagraph(elementID, text) {
   return elem
 }
 
-function createButton(elementID, text) {
+function createButton(elementID, text, attributes = {}) {
   let elem = createElement("button", elementID);
   elem.innerText = `${text}`
+  for (const [name, value] of Object.entries(attributes)) {
+    elem.setAttribute(name, value);
+  }
   return elem;
+}
+
+function changeAttributes(elem, attributes = {}) {
+  for (const [name, value] of Object.entries(attributes)) {
+    elem.setAttribute(name, value);
+  }
 }
 
 function createImage(elementID, src) {
