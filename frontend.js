@@ -109,6 +109,10 @@ function createParagraph(elementID, text) {
   return elem
 }
 
+function initBody() {
+  createElement("body", "body")
+}
+
 function createButton(elementID, text, attributes = {}) {
   let elem = createElement("button", elementID);
   elem.innerText = `${text}`
