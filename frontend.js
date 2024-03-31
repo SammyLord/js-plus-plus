@@ -310,6 +310,19 @@ function readInternetText(url) {
   return response
 }
 
+function readInternetText(url) {
+    var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+    request.open('GET', url, false); // Open the request with synchronous mode
+    request.send(null); // Send the request with no additional data
+
+    if (request.status === 200) { // Check if the request was successful
+        return request.responseText; // Return the response text
+    } else {
+        return 'Error: ' + request.status; // Return an error message if the request failed
+    }
+}
+
+
 function requir3(jsURL) {
   let req = readInternetText(jsURL);
   console.log(req)
