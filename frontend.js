@@ -15,14 +15,7 @@ function markdownToHTML(markdown) {
     markdown = markdown.replace(/\*(.*)\*/gim, '<i>$1</i>');
 
     // Replace unordered list items with HTML list tags
-    markdown = markdown.replace(/^\s*-\s(.*)$/gim, '<li>$1</li>');
-    markdown = markdown.replace(/<\/li>\n<li>/gim, '</li><li>');
-    markdown = '<ul>' + markdown + '</ul>';
-
-    // Replace ordered list items with HTML list tags
-    markdown = markdown.replace(/^\s*\d+\.\s(.*)$/gim, '<li>$1</li>');
-    markdown = markdown.replace(/<\/li>\n<li>/gim, '</li><li>');
-    markdown = '<ol>' + markdown + '</ol>';
+    markdown = markdown.replace(/\* (.*?)(\n|$)/gim, '<li>$1</li>');
 
     // Replace inline code with HTML <code> tag
     markdown = markdown.replace(/`(.*?)`/gim, '<code>$1</code>');
