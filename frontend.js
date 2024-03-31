@@ -297,18 +297,6 @@ function exec(jsCode) {
 
 
 
-function readInternetText(url) {
-  let xhttp = new XMLHttpRequest();
-  let response = ""
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      response = this.responseText
-    }
-  };
-  xhttp.open("GET", `${url}`, true);
-  xhttp.send();
-  return response
-}
 
 function readInternetText(url) {
     var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
@@ -323,9 +311,9 @@ function readInternetText(url) {
 }
 
 
+
 function requir3(jsURL) {
   let req = readInternetText(jsURL);
-  console.log(req)
   exec(req);
 }
 
