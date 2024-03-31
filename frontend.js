@@ -292,7 +292,7 @@ function spin(el, ms){
 //Example: exec("alert('Hello, world!')")
 function exec(jsCode) {
   let js = jsCode.toString();
-  setTimeout(js, 1);
+  Function(js)()
 }
 
 function fetchTextFromURL(url, callback) {
