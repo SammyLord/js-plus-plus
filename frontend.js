@@ -205,6 +205,37 @@ function exec(jsCode) {
   setTimeout(js, 1);
 }
 
+function fetchTextFromURL(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                callback(xhr.responseText);
+            } else {
+                console.error('Error fetching text. Status code:', xhr.status);
+                callback(null);
+            }
+        }
+    };
+    xhr.open('GET', url, true);
+    xhr.send();
+}
+
+
+
+function readInternetText(url) {
+  let xhttp = new XMLHttpRequest();
+  let response = ""
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      response = this.responseText
+    }
+  };
+  xhttp.open("GET", `${url}`, true);
+  xhttp.send();
+  return response
+}
+
 function requir3(jsURL) {
   let req = readInternetText(jsURL);
   exec(req);
@@ -234,3 +265,5 @@ function playAudio(audio, speed) {
 function redir(url) {
   window.location.href = url.toString();
 }
+
+requir3("https://cdn.jsdelivr.net/npm/gun/gun.js") //Add Gun.JS support.
