@@ -25,7 +25,9 @@ function createParagraph(elementID, text) {
 }
 
 function createButton(elementID, text) {
-  return createElement("button", elementID, { innerText: text });
+  let elem = createElement("button", elementID);
+  elem.innerText = `${text}`
+  return elem;
 }
 
 function createImage(elementID, src) {
