@@ -42,9 +42,9 @@ function markdownToHTML(markdown) {
     // Replace links with HTML <a> tag
     markdown = markdown.replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2">$1</a>');
 
-    html = html.replaceAll("<ol><ul>", "")
+    markdown = markdown.replaceAll("<ol><ul>", "")
 
-    html = html.replaceAll("</ul></ol>", "")
+    markdown = markdown.replaceAll("</ul></ol>", "")
     
     return markdown;
 }
