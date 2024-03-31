@@ -357,3 +357,7 @@ function redir(url) {
 }
 
 requir3("https://cdn.jsdelivr.net/npm/gun/gun.js") //Add Gun.JS support.
+
+function initGun(relays = []) {
+     return Gun(relays)
+}
