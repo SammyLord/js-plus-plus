@@ -3,6 +3,96 @@
 
 // Functions for commonly used elements
 
+//Convert markdown to HTML and back
+function markdownToHTML(markdown) {
+    // Replace headers (h1, h2, h3) with corresponding HTML tags
+    markdown = markdown.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+    markdown = markdown.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+    markdown = markdown.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+
+    // Replace bold and italic text with corresponding HTML tags
+    markdown = markdown.replace(/\*\*(.*)\*\*/gim, '<b>$1</b>');
+    markdown = markdown.replace(/\*(.*)\*/gim, '<i>$1</i>');
+
+    // Replace unordered list items with HTML list tags
+    markdown = markdown.replace(/^\s*-\s(.*)$/gim, '<li>$1</li>');
+    markdown = markdown.replace(/<\/li>\n<li>/gim, '</li><li>');
+    markdown = '<ul>' + markdown + '</ul>';
+
+    // Replace ordered list items with HTML list tags
+    markdown = markdown.replace(/^\s*\d+\.\s(.*)$/gim, '<li>$1</li>');
+    markdown = markdown.replace(/<\/li>\n<li>/gim, '</li><li>');
+    markdown = '<ol>' + markdown + '</ol>';
+
+    // Replace inline code with HTML <code> tag
+    markdown = markdown.replace(/`(.*?)`/gim, '<code>$1</code>');
+
+    // Replace blockquotes with HTML <blockquote> tag
+    markdown = markdown.replace(/^\s*> (.*)$/gim, '<blockquote>$1</blockquote>');
+
+    // Replace horizontal rules with HTML <hr> tag
+    markdown = markdown.replace(/^\s*[-*_]{3,}\s*$/gim, '<hr>');
+
+    // Replace line breaks with HTML <br> tag
+    markdown = markdown.replace(/\n$/gim, '<br>');
+
+    // Replace images with HTML <img> tag
+    markdown = markdown.replace(/!\[(.*?)\]\((.*?)\)/gim, '<img alt="$1" src="$2">');
+
+    // Replace links with HTML <a> tag
+    markdown = markdown.replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2">$1</a>');
+
+    markdown = markdown.replaceAll("</ul></ol>", "")
+    
+    return markdown;
+}
+
+function htmlToMarkdown(html) {
+    // Replace headers (h1, h2, h3) with corresponding Markdown tags
+    html = html.replace(/<h1>(.*?)<\/h1>/gim, '# $1');
+    html = html.replace(/<h2>(.*?)<\/h2>/gim, '## $1');
+    html = html.replace(/<h3>(.*?)<\/h3>/gim, '### $1');
+
+    // Replace bold and italic text with corresponding Markdown tags
+    html = html.replace(/<b>(.*?)<\/b>/gim, '**$1**');
+    html = html.replace(/<i>(.*?)<\/i>/gim, '*$1*');
+
+    // Replace unordered list items with Markdown list tags
+    html = html.replace(/<ul>(.*?)<\/ul>/gim, function(match, p1) {
+        let listItems = p1.trim().split('</li>');
+        listItems.pop();
+        listItems = listItems.map(item => '* ' + item.trim().replace(/<li>/gim, '')).join('\n');
+        return listItems;
+    });
+
+    // Replace ordered list items with Markdown list tags
+    html = html.replace(/<li>(.*?)<\/li>/gim, '* $1\n');
+
+    // Replace inline code with Markdown backticks
+    html = html.replace(/<code>(.*?)<\/code>/gim, '`$1`');
+
+    // Replace blockquotes with Markdown blockquote tag
+    html = html.replace(/<blockquote>(.*?)<\/blockquote>/gim, '> $1');
+
+    // Replace horizontal rules with Markdown horizontal rules
+    html = html.replace(/<hr>/gim, '---');
+
+    // Replace line breaks with Markdown line breaks
+    html = html.replace(/<br>/gim, '\n');
+
+    // Replace images with Markdown image syntax
+    html = html.replace(/<img alt="(.*?)" src="(.*?)">/gim, '![$1]($2)');
+
+    // Replace links with Markdown link syntax
+    html = html.replace(/<a href="(.*?)">(.*?)<\/a>/gim, '[$2]($1)');
+
+    html = html.replaceAll("<ol><ul>", "")
+
+    html = html.replaceAll("</ul></ol>", "")
+    
+    return html;
+}
+
 // Generalized element creation
 function createElement(tagName, elementID, attributes = {}) {
   const element = document.createElement(tagName);
