@@ -21,14 +21,15 @@ function createDiv(elementID) {
 function createParagraph(elementID, text) {
   let elem = createElement("p", elementID);
   elem.innerText = `${text}`
+  return elem
 }
 
 function createButton(elementID, text) {
-  createElement("button", elementID, { innerText: text });
+  return createElement("button", elementID, { innerText: text });
 }
 
 function createImage(elementID, src) {
-  createElement("img", elementID, { src: src });
+  return createElement("img", elementID, { src: src });
 }
 
 // Get URL parameters
