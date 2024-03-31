@@ -1,173 +1,137 @@
-//Created by Samuel Lord (NodeMixaholic/Sparksammy)
-//Licensed under Samuel Public License with <3
+// Created by Samuel Lord (NodeMixaholic/Sparksammy)
+// Licensed under Samuel Public License with <3
 
-//Just like readTextFile("path/to/file.txt"); except based off of the WWW and needs a full URL. Also: requires JQuery
-var litext = "";
-function returner(valueToReturn) {
-  return valueToReturn;
+// Functions for commonly used elements
+
+// Generalized element creation
+function createElement(tagName, elementID, attributes = {}) {
+  const element = document.createElement(tagName);
+  element.id = elementID;
+  for (const [name, value] of Object.entries(attributes)) {
+    element.setAttribute(name, value);
+  }
+  document.body.appendChild(element);
+  return element;
 }
 
-function readInternetText(url) {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-            litext += request.responseText;
-        }
-    }
-    request.open("GET", url, true);
-    request.send();
+function createDiv(elementID) {
+  createElement("div", elementID);
 }
 
-var urlParams = new URLSearchParams(window.location.search); // Added, just in case someone wants to do something to the urlparams
-
-//Example: readTextFile("path/to/file.txt");
-function readTextFile(file) {
-    file = file.toString();
-    let file2read = new File([""], file);
-    let reader = new FileReader();
-    let lastReadOutput = reader.readAsText(file2read, "UTF-8");
-    return lastReadOutput;
+function createParagraph(elementID, text) {
+  let elem = createElement("p", elementID);
+  elem.innerText = `${text}`
 }
 
-var varifyOutput = "";
-function varify(value) {
-  varifyOutput = value;
+function createButton(elementID, text) {
+  createElement("button", elementID, { innerText: text });
 }
 
-//Example: readDataFile("path/to/file.txt");
+function createImage(elementID, src) {
+  createElement("img", elementID, { src: src });
+}
+
+// Get URL parameters
+function getURLParameters() {
+  return new URLSearchParams(window.location.search);
+}
+
+// Read file contents
+function readFileContents(file) {
+  file = file.toString();
+  const fileToRead = new File([""], file);
+  const reader = new FileReader();
+  return new Promise((resolve, reject) => {
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsText(fileToRead, "UTF-8");
+  });
+}
+
+// Read data file as data URL
 function readDataFile(file) {
-    file = file.toString();
-    let file2read = new File([""], file);
-    let reader = new FileReader();
-    let lastReadOutput = reader.readAsDataURL(file2read);
-    return lastReadOutput;
+  file = file.toString();
+  const fileToRead = new File([""], file);
+  const reader = new FileReader();
+  return new Promise((resolve, reject) => {
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(fileToRead);
+  });
 }
 
 function writeToBody(html) {
-    document.body.innerHTML += html.toString();
+  document.body.innerHTML += html.toString();
 }
 
 function overwriteBody(html) {
-    document.body.innerHTML = html.toString();
+  document.body.innerHTML = html.toString();
 }
 
 function randomPOS(elementID) {
-  let top=Math.floor(Math.random() * Math.floor(90));             
-  let left=Math.floor(Math.random() * Math.floor(90));                    
-  document.getElementById(elementID).style.top=top+"%";                   
-  document.getElementById(elementID).style.left=left+"%"
+  const top = Math.floor(Math.random() * 90);
+  const left = Math.floor(Math.random() * 90);
+  document.getElementById(elementID).style.top = `${top}%`;
+  document.getElementById(elementID).style.left = `${left}%`;
 }
 
-function pos(elementID,x,y) {
-  let top = y;             
-  let left = x;                    
-  document.getElementById(elementID).style.top=top+"%";                   
-  document.getElementById(elementID).style.left=left+"%"
+function pos(elementID, x, y) {
+  document.getElementById(elementID).style.top = `${y}%`;
+  document.getElementById(elementID).style.left = `${x}%`;
 }
 
-// Selects a random value in an array
-// Example: randomSelectArray(Array); (Change the array!)
-function randomSelectArray(avar){ 
-  var isarray = Array.isArray(avar);
-  if (isarray == true) {
-    let rnfa = Math.floor(Math.random()*avar.length);
-    rrfa = avar[rnfa];
-    return rrfa;
-  } else if (isarray == false){
-    console.log(`Error, ${avar} is not an Array...`);
+// Select a random value in an array (handles non-arrays)
+function randomSelectArray(array) {
+  if (Array.isArray(array)) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
+  } else {
+    console.log(`Error: ${array} is not an Array!`);
+    return null; // Or throw an error
   }
 }
 
 function sleep(ms) {
-  setTimeout(function () {}, ms);
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function asyncSleep(ms) {
   await new Promise(r => setTimeout(r, ms));
 }
 
-// Remade by Sparksammy
-// Example: isFunction(el)
+// Check if a variable is a function
 function isFunction(item) {
-  if (typeof item === 'function') {
-    return true;
-  } else {
-    return false;
-  }
+  return typeof item === 'function';
 }
 
-function applyCSS(elemID, prop, value) {
-    let e = document.getElementById(elemID);
-    e.style[prop] = value;
+function applyCSS(elementID, prop, value) {
+  document.getElementById(elementID).style[prop] = value;
 }
 
-function createParagraph(elementID) {
-    let e = document.createElement("p");
-    e.setAttribute("id", elementID);
-    document.body.appendChild(e);
+function writeTimeAndDate(elementID, hourFormat) {
+  const element = document.getElementById(elementID);
+  const date = new Date();
+  const locale = hourFormat === 24 ? "en-GB" : "en-US";
+  element.innerText = date.toLocaleString(locale);
 }
 
-function createHeader(num, elementID) {
-    let e = document.createElement(`h${num}`);
-    e.setAttribute("id", elementID);
-    document.body.appendChild(e);
+function writeText(elementID, str) {
+  document.getElementById(elementID).innerText = String(str);
 }
 
-function createElement(tagName, elementID) {
-    let e = document.createElement(tagName);
-    e.setAttribute("id", elementID);
-    document.body.appendChild(e);
-}
-
-function alignSelf(elemID, alignDirection) {
-    let e = document.getElementById(elemID);
-    e.style.alignSelf = alignDirection;
-}
-
-function alignContent(elemID, alignDirection) {
-    let e = document.getElementById(elemID);
-    e.style.alignContent = alignDirection;
-}
-
-function alignAll(elemID, alignDirection) {
-    alignSelf(elemID, alignDirection);
-    alignContent(elemID, alignDirection);
-}
-
-function writeTimeAndDate(elemID, hourFormat) {
-    let e = document.getElementById(elemID);
-    let d = new Date();
-    let locale = "en-GB";
-    if (hourFormat == 24) {
-        locale = locale; //leave it the same.
-    } else {
-        locale = "en-US";
-    } 
-    let tdStr = d.toLocaleString(locale);
-    e.innerText = tdStr;
-}
-
-function writeText(elemID, str) {
-    let e = document.getElementById(elemID);
-    e.innerText = String(str);
-}
-
-function writeHTML(elemID, str) {
-    let e = document.getElementById(elemID);
-    e.innerHTML = String(str);
+function writeHTML(elementID, str) {
+  document.getElementById(elementID).innerHTML = String(str);
 }
 
 function clearPage() {
-    document.body.innerHTML = "";
+  document.body.innerHTML = "";
 }
 
-function createList(listID, jsArray) {
-    let listParent = document.createElement("ul");
-    listParent.setAttribute("id", listID);
-    document.body.appendChild(listParent);
-    jsArray.forEach(item => {
-        listParent.innerHTML += `<li>${item}</li>`;
-    });
+function createList(listID, items) {
+  const list = document.createElement("ul");
+  list.id = listID;
+  document.body.appendChild(list);
+  items.forEach(item => (list.innerHTML += `<li>${item}</li>`));
 }
 
 function addToList(listID, jsArray) {
@@ -217,7 +181,7 @@ function fadeIn(el, ms) {
 
 function spin(el, ms){
   elem = getElementById(el);
-  for (i = 0; i < (ms / 360); i++) {
+  for (i = 0; i < (ms / 361); i++) {
     elem.style.transform = 'rotate(' + i + 'deg)';
   }
 }
