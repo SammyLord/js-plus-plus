@@ -295,22 +295,6 @@ function exec(jsCode) {
   Function(js)()
 }
 
-function fetchTextFromURL(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                callback(xhr.responseText);
-            } else {
-                console.error('Error fetching text. Status code:', xhr.status);
-                callback(null);
-            }
-        }
-    };
-    xhr.open('GET', url, true);
-    xhr.send();
-}
-
 
 
 function readInternetText(url) {
@@ -328,6 +312,7 @@ function readInternetText(url) {
 
 function requir3(jsURL) {
   let req = readInternetText(jsURL);
+  console.log(req)
   exec(req);
 }
 
