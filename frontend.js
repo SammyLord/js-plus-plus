@@ -109,7 +109,7 @@ function createParagraph(elementID, text) {
   return elem
 }
 
-function initBody() {
+function createBody() {
   createElement("body", "body")
 }
 
