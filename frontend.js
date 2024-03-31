@@ -109,11 +109,21 @@ function createParagraph(elementID, text) {
   return elem
 }
 
-function createBody() {
-  const element = document.createElement("body");
-  element.id = "body";
-  document.appendChild(element);
-  return element;
+function initBody(bodyID) {
+  // Create a new body element with the desired id
+  const newBody = document.createElement("body");
+  newBody.id = bodyID;
+
+  // Get a reference to the existing body element (if any)
+  const oldBody = document.body;
+
+  // Replace the existing body (if present) with the new one
+  if (oldBody) {
+      document.documentElement.replaceChild(newBody, oldBody);
+  } else {
+      // Simply append the new body if none exists
+      document.documentElement.appendChild(newBody);
+  }
 }
 
 function createButton(elementID, text, attributes = {}) {
