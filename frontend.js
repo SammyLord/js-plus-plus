@@ -110,7 +110,10 @@ function createParagraph(elementID, text) {
 }
 
 function createBody() {
-  createElement("body", "body")
+  const element = document.createElement("body");
+  element.id = "body";
+  document.appendChild(element);
+  return element;
 }
 
 function createButton(elementID, text, attributes = {}) {
