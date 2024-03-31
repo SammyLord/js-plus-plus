@@ -109,7 +109,7 @@ function createParagraph(elementID, text) {
   return elem
 }
 
-function initBody(bodyID) {
+function initBody(bodyID = "body") {
   // Create a new body element with the desired id
   const newBody = document.createElement("body");
   newBody.id = bodyID;
