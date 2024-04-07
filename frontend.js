@@ -1,4 +1,5 @@
 // Created by Samuel Lord (NodeMixaholic/Sparksammy)
+// Now Maintained by Maxwell (GOrwell1984)
 // Licensed under Samuel Public License with <3
 
 // Functions for commonly used elements
