@@ -3,7 +3,9 @@
 // Licensed under Samuel Public License with <3
 
 // Functions for commonly used elements
-
+function getElementById(el) {
+  document.getElementById(el)
+}
 //Convert markdown to HTML and back
 function markdownToHTML(markdown) {
     // Replace headers (h1, h2, h3) with corresponding HTML tags
