@@ -328,12 +328,31 @@ function fadeIn(el, ms) {
   }
 }
 
-function spin(el, ms){
-  elem = getElementById(el);
-  for (i = 0; i < (ms / 361); i++) {
-    elem.style.transform = 'rotate(' + i + 'deg)';
+function spin(elementID, duration) {
+  const element = document.getElementById(elementID);
+  if (!element) {
+    console.error(`Element with ID '${elementID}' not found.`);
+    return;
   }
+
+  let start;
+  const animate = (timestamp) => {
+    if (!start) start = timestamp;
+    const elapsed = timestamp - start;
+    const rotation = (elapsed / duration) * 360;
+    element.style.transform = `rotate(${rotation}deg)`;
+
+    if (elapsed < duration) {
+      requestAnimationFrame(animate);
+    } else {
+      start = null;
+      element.style.transform = 'none'; // Reset transform after animation completes
+    }
+  };
+
+  requestAnimationFrame(animate);
 }
+
 
 //Eval alternative
 //Example: exec("alert('Hello, world!')")
