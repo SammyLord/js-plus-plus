@@ -385,6 +385,22 @@ function redir(url) {
   window.location.href = url.toString();
 }
 
+// Function to import Google Fonts via name
+function importGoogleFont(fontName) {
+    // Create a new link element
+    const link = document.createElement('link');
+    
+    // Set the rel attribute to 'stylesheet'
+    link.rel = 'stylesheet';
+    
+    // Set the href attribute to the Google Fonts URL with the specified font name
+    link.href = `https://fonts.googleapis.com/css?family=${fontName.replace(' ', '+')}`;
+    
+    // Append the link element to the head of the document
+    document.head.appendChild(link);
+}
+
+
 requir3("https://cdn.jsdelivr.net/npm/gun/gun.js") //Add Gun.JS support.
 
 function initGun(relays = []) {
