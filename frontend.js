@@ -3,7 +3,8 @@
 // Licensed under Samuel Public License with <3
 
 // Functions for commonly used elements
-// get element by id
+
+// Get element by ID
 function getElementById(elementID) {
   return document.getElementById(elementID)
 }
@@ -168,6 +169,23 @@ function createButton(elementID, text, attributes = {}) {
     elem.setAttribute(name, value);
   }
   return elem;
+}
+
+// Insert element with ID to element with ID
+function insertElementIntoId(elementIdOuter, elementIdSelf, tagName) {
+  const element = document.createElement(tagName);
+  element.id = elementIdSelf;
+  for (const [name, value] of Object.entries(attributes)) {
+    element.setAttribute(name, value);
+  }
+  getElementById(elementIdOuter).appendChild(element);
+  return element;
+}
+
+// Insert HTML to element with ID
+function insertHTMLIntoId(elementIdOuter, html) {
+  getElementById(elementIdOuter).innerHTML = `${String(html)}`;
+  return element;
 }
 
 function changeAttributes(element, attributes = {}) {
