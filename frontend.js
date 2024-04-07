@@ -109,6 +109,36 @@ function createParagraph(elementID, text) {
   return elem
 }
 
+function initHead(pageTitle = "") {
+    // Create head element
+    let head = document.createElement("head");
+
+    // Create title element
+    let titleElement = document.createElement("title");
+    titleElement.textContent = pageTitle;
+
+    // Create link element for app icon
+    let appIcon = document.createElement("link");
+    appIcon.rel = "apple-touch-icon";
+    appIcon.sizes = "180x180";
+    appIcon.href = "icon.png";
+
+    // Create link element for favicon
+    let favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.type = "image/png";
+    favicon.href = "icon.png";
+
+    // Append title, app icon, and favicon to the head element
+    head.appendChild(titleElement);
+    head.appendChild(appIcon);
+    head.appendChild(favicon);
+
+    // Append head element to the document
+    document.documentElement.insertBefore(head, document.documentElement.firstChild);
+}
+
+
 function initBody(bodyID = "body") {
   // Create a new body element with the desired id
   const newBody = document.createElement("body");
