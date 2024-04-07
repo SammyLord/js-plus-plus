@@ -5,7 +5,7 @@
 // Functions for commonly used elements
 // get element by id
 function getElementById(el) {
-  document.getElementById(el)
+  return document.getElementById(el)
 }
 
 //Convert markdown to HTML and back
