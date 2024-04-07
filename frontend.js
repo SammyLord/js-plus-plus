@@ -4,8 +4,8 @@
 
 // Functions for commonly used elements
 // get element by id
-function getElementById(el) {
-  return document.getElementById(el)
+function getElementById(elementID) {
+  return document.getElementById(elementID)
 }
 
 //Convert markdown to HTML and back
@@ -170,9 +170,9 @@ function createButton(elementID, text, attributes = {}) {
   return elem;
 }
 
-function changeAttributes(elem, attributes = {}) {
+function changeAttributes(element, attributes = {}) {
   for (const [name, value] of Object.entries(attributes)) {
-    elem.setAttribute(name, value);
+    element.setAttribute(name, value);
   }
 }
 
@@ -292,24 +292,24 @@ function addToList(listID, jsArray) {
 
 // Gets the value of an attribute
 // Example: getAttribute(document.getElementById("link"), "href");
-function getAttribute(el, att) {
-  let result = el.getAttribute(att);
+function getAttribute(element, attribute) {
+  let result = element.getAttribute(attribute);
   return result;
 }
 
 // Show/Hide Elements
-// Example: hideShow(el)
-function hideShow(el) {
-  if (el.style.display == 'none') {
-    el.style.display = '';
+// Example: hideShow(element)
+function hideShow(element) {
+  if (element.style.display == 'none') {
+    element.style.display = '';
   } else{
-    el.style.display = 'none';
+    element.style.display = 'none';
   }
 }
 
-// Example: fadeOut(el, 1000)
-function fadeOut(el, ms) {
-  let elem = getElementById(el);
+// Example: fadeOut(element, 1000)
+function fadeOut(element, ms) {
+  let elem = getElementById(element);
   ms = parseInt(ms);
   for (i = 0; i < (ms + 1); i++) {
     elem.style.opacity -= (i / 100);
@@ -317,9 +317,9 @@ function fadeOut(el, ms) {
   }
 }
 
-// Example: fadeIn(el, 1000);
-function fadeIn(el, ms) {
-  elem = getElementById(el);
+// Example: fadeIn(element, 1000);
+function fadeIn(element, ms) {
+  elem = getElementById(element);
   elem.style.opacity = 0;
   ms = parseInt(ms);
   for (i = 0; i < (ms + 1); i++) {
@@ -429,3 +429,4 @@ requir3("https://cdn.jsdelivr.net/npm/gun/gun.js") //Add Gun.JS support.
 function initGun(relays = []) {
      return Gun(relays)
 }
+
