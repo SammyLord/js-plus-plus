@@ -3,13 +3,46 @@
 // Now Maintained by Sneed Group
 // Licensed under Samuel Public License with <3
 class JSPlusPlus {
-    General = class {
+    static General = class {
+
+        static Prototyping = class {
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+              
+            async asyncSleep(ms) {
+                await new Promise(r => setTimeout(r, ms));
+            }
+
+            consoleUseWarner(warning) {
+                try {
+                    console.log(`%cSTOP!%c
+                ${warning}`, "font-size: 42px; color: white; background-color: red;", "font-size: 20px; color: white; background-color: red;")
+                } catch {
+                    console.warn(`STOP!
+                    ${warning}`)
+                }
+            }
+        }
+
+        static Debug = class {
+            tryCatch(funcTry, funcCatch) {
+                try {
+                    funcTry
+                } catch {
+                    funcCatch
+                }
+            }
+        }
+
         //Eval alternative
         //Example: exec("alert('Hello, world!')")
         exec(jsCode) {
             let js = jsCode.toString();
             Function(js)()
         }
+
+
         readInternetText(url) {
             try {
                 var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
@@ -50,14 +83,16 @@ class JSPlusPlus {
                 let req = JSPlusPlus.JSPlusPlus.readInternetText(jsURI);
                 JSPlusPlus.General.exec(req);
             } catch {
-                console.log(`Error! (Using Node.JS?)
+                console.log(`Error! (Using Node.JS/Bun?)
                 
                 If on NodeJS or equivalent try:
                 'let ${jsURI} = require("${jsURI}")'`)
             }
         }
+
+
     }
-    HTMLFrontend = class {
+    static HTMLFrontend = class {
         // Get element by ID
         getElementById(elementID) {
           return document.getElementById(elementID)
@@ -312,13 +347,6 @@ class JSPlusPlus {
           }
         }
         
-        sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
-        }
-        
-        async asyncSleep(ms) {
-          await new Promise(r => setTimeout(r, ms));
-        }
         
         // Check if a variable is a function
         isFunction(item) {
@@ -385,7 +413,7 @@ class JSPlusPlus {
           ms = parseInt(ms);
           for (i = 0; i < (ms + 1); i++) {
             elem.style.opacity -= (i / 100);
-            sleep(1);
+            JSPlusPlus.General.Prototyping.sleep(1);
           }
         }
         
@@ -396,7 +424,7 @@ class JSPlusPlus {
           ms = parseInt(ms);
           for (i = 0; i < (ms + 1); i++) {
             elem.style.opacity += (i / 100);
-            sleep(1);
+            JSPlusPlus.General.Prototyping.sleep(1);
           }
         }
         
