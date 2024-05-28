@@ -5,7 +5,7 @@
 class JSPlusPlus {
     static General = class {
 
-        static Prototyping = class {
+        static Helpers = class {
             sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
@@ -23,6 +23,239 @@ class JSPlusPlus {
                     ${warning}`)
                 }
             }
+
+            // Constructor Extras BEGIN
+            enableJSConstructorExtras() {
+                Date.prototype.toUSADateString = function() {
+                    let day = this.getDate().toString().padStart(2, '0');
+                    let month = (this.getMonth() + 1).toString().padStart(2, '0');
+                    let year = this.getFullYear();
+                    return `${day}/${month}/${year}`;
+                };
+                
+                Date.prototype.toISODateString = function() {
+                    let year = this.getFullYear();
+                    let month = (this.getMonth() + 1).toString().padStart(2, '0');
+                    let day = this.getDate().toString().padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                };
+                
+                Object.merge = function(target, source) {
+                    for (let key in source) {
+                        if (source.hasOwnProperty(key)) {
+                            target[key] = source[key];
+                        }
+                    }
+                    return target;
+                };
+                
+                Function.prototype.once = function() {
+                    let called = false;
+                    const func = this;
+                    return function(...args) {
+                        if (!called) {
+                            called = true;
+                            return func.apply(this, args);
+                        }
+                    };
+                };
+                
+                String.prototype.capitalize = function() {
+                    return this.charAt(0).toUpperCase() + this.slice(1);
+                };
+                
+                Array.prototype.last = function() {
+                    return this[this.length - 1];
+                };
+                
+                Array.prototype.unique = function() {
+                    return [...new Set(this)];
+                };
+                
+                Array.prototype.remove = function(element) {
+                    const index = this.indexOf(element);
+                    if (index !== -1) {
+                        this.splice(index, 1);
+                    }
+                    return this;
+                };
+                
+                String.prototype.reverse = function() {
+                    return this.split('').reverse().join('');
+                };
+                
+                Function.prototype.debounce = function(wait) {
+                    let timeout;
+                    const func = this;
+                    return function(...args) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => func.apply(this, args), wait);
+                    };
+                };
+                
+                Date.prototype.addDays = function(days) {
+                    let date = new Date(this.valueOf());
+                    date.setDate(date.getDate() + days);
+                    return date;
+                };
+                
+                Array.prototype.flatten = function() {
+                    return this.reduce((flat, toFlatten) => {
+                        return flat.concat(Array.isArray(toFlatten) ? toFlatten.flatten() : toFlatten);
+                    }, []);
+                };
+                
+                String.prototype.camelCase = function() {
+                    return this.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+                        return index === 0 ? match.toLowerCase() : match.toUpperCase();
+                    }).replace(/\s+/g, '');
+                };
+                
+                Number.prototype.toCurrency = function(locale = 'en-US', currency = 'USD') {
+                    return this.toLocaleString(locale, { style: 'currency', currency });
+                };
+                
+                Object.isEmpty = function(obj) {
+                    return Object.keys(obj).length === 0 && obj.constructor === Object;
+                };
+                
+                Array.prototype.chunk = function(size) {
+                    let result = [];
+                    for (let i = 0; i < this.length; i += size) {
+                        result.push(this.slice(i, i + size));
+                    }
+                    return result;
+                };
+                
+                Array.prototype.first = function() {
+                    return this[0];
+                };
+                
+                String.prototype.contains = function(substring) {
+                    return this.indexOf(substring) !== -1;
+                };
+                
+                Object.assignDeep = function(target, ...sources) {
+                    sources.forEach(source => {
+                        for (let key in source) {
+                            if (source[key] instanceof Object) {
+                                if (!target[key]) {
+                                    target[key] = {};
+                                }
+                                Object.assignDeep(target[key], source[key]);
+                            } else {
+                                target[key] = source[key];
+                            }
+                        }
+                    });
+                    return target;
+                };
+                
+                Array.prototype.shuffle = function() {
+                    for (let i = this.length - 1; i > 0; i--) {
+                        let j = Math.floor(Math.random() * (i + 1));
+                        [this[i], this[j]] = [this[j], this[i]];
+                    }
+                    return this;
+                };
+                
+                String.prototype.isPalindrome = function() {
+                    let normalized = this.replace(/[\W_]/g, '').toLowerCase();
+                    return normalized === normalized.split('').reverse().join('');
+                };
+                
+                Number.prototype.isPrime = function() {
+                    if (this <= 1) return false;
+                    for (let i = 2, sqrt = Math.sqrt(this); i <= sqrt; i++) {
+                        if (this % i === 0) return false;
+                    }
+                    return true;
+                };
+                
+                Array.prototype.compact = function() {
+                    return this.filter(Boolean);
+                };
+                
+                Array.prototype.pluck = function(property) {
+                    return this.map(item => item[property]);
+                };
+                
+                String.prototype.toKebabCase = function() {
+                    return this.replace(/([a-z])([A-Z])/g, '$1-$2')
+                               .replace(/[\s_]+/g, '-')
+                               .toLowerCase();
+                };
+                
+                Function.prototype.memoize = function() {
+                    const cache = {};
+                    const func = this;
+                    return function(...args) {
+                        const key = JSON.stringify(args);
+                        if (!cache[key]) {
+                            cache[key] = func.apply(this, args);
+                        }
+                        return cache[key];
+                    };
+                };
+                
+                Object.invert = function(obj) {
+                    let inverted = {};
+                    for (let key in obj) {
+                        if (obj.hasOwnProperty(key)) {
+                            inverted[obj[key]] = key;
+                        }
+                    }
+                    return inverted;
+                };
+                
+                Date.prototype.toTimeString = function() {
+                    let hours = this.getHours().toString().padStart(2, '0');
+                    let minutes = this.getMinutes().toString().padStart(2, '0');
+                    let seconds = this.getSeconds().toString().padStart(2, '0');
+                    return `${hours}:${minutes}:${seconds}`;
+                };
+                
+                String.prototype.truncate = function(length) {
+                    return this.length > length ? this.slice(0, length) + '...' : this;
+                };
+                
+                Number.prototype.toOrdinal = function() {
+                    const suffixes = ["th", "st", "nd", "rd"];
+                    const v = this % 100;
+                    return this + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
+                };
+                
+                Array.prototype.sum = function() {
+                    return this.reduce((total, num) => total + num, 0);
+                };
+                
+                String.prototype.isUpperCase = function() {
+                    return this.valueOf() === this.toUpperCase();
+                };
+                
+                Function.prototype.delay = function(ms) {
+                    setTimeout(this, ms);
+                };
+                
+                Object.keysAmount = function(obj) {
+                    return Object.keys(obj).length;
+                };
+                
+                Date.prototype.isWeekend = function() {
+                    const day = this.getDay();
+                    return day === 0 || day === 6;
+                };
+                
+                Array.prototype.average = function() {
+                    return this.sum() / this.length;
+                };
+                
+                String.prototype.isLowerCase = function() {
+                    return this.valueOf() === this.toLowerCase();
+                };
+                console.log("Javascript Extras Enabled!")
+            }
+            // Constructor Extras END
         }
 
         static Debug = class {
@@ -413,7 +646,7 @@ class JSPlusPlus {
           ms = parseInt(ms);
           for (i = 0; i < (ms + 1); i++) {
             elem.style.opacity -= (i / 100);
-            JSPlusPlus.General.Prototyping.sleep(1);
+            JSPlusPlus.General.Helpers.sleep(1);
           }
         }
         
@@ -424,7 +657,7 @@ class JSPlusPlus {
           ms = parseInt(ms);
           for (i = 0; i < (ms + 1); i++) {
             elem.style.opacity += (i / 100);
-            JSPlusPlus.General.Prototyping.sleep(1);
+            JSPlusPlus.General.Helpers.sleep(1);
           }
         }
         
@@ -500,3 +733,4 @@ class JSPlusPlus {
         }
     }
 }
+
