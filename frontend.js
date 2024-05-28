@@ -9,9 +9,20 @@ class JSPlusPlus {
             let js = jsCode.toString();
             Function(js)()
         }
+        readInternetText(url) {
+            var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+            request.open('GET', url, false); // Open the request with synchronous mode
+            request.send(null); // Send the request with no additional data
+        
+            if (request.status === 200) { // Check if the request was successful
+                return request.responseText; // Return the response text
+            } else {
+                return 'Error: ' + request.status; // Return an error message if the request failed
+            }
+        }
         require(jsURI) {
             try {
-                let req = JSPlusPlus.Frontend.readInternetText(jsURI);
+                let req = JSPlusPlus.JSPlusPlus.readInternetText(jsURI);
                 JSPlusPlus.General.exec(req);
             } catch {
                 console.log(`Error! (Using Node.JS?)
@@ -21,7 +32,7 @@ class JSPlusPlus {
             }
         }
     }
-    Frontend = class {
+    HTMLFrontend = class {
         // Get element by ID
         getElementById(elementID) {
           return document.getElementById(elementID)
@@ -387,18 +398,6 @@ class JSPlusPlus {
           };
         
           requestAnimationFrame(animate);
-        }
-        
-        readInternetText(url) {
-            var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-            request.open('GET', url, false); // Open the request with synchronous mode
-            request.send(null); // Send the request with no additional data
-        
-            if (request.status === 200) { // Check if the request was successful
-                return request.responseText; // Return the response text
-            } else {
-                return 'Error: ' + request.status; // Return an error message if the request failed
-            }
         }
         
         // Example: getFileSize(path/to/file)
