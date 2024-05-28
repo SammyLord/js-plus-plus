@@ -1,3 +1,4 @@
+// JS++
 // Created by Samuel Lord (NodeMixaholic/Sparksammy)
 // Now Maintained by Sneed Group
 // Licensed under Samuel Public License with <3
@@ -10,16 +11,40 @@ class JSPlusPlus {
             Function(js)()
         }
         readInternetText(url) {
-            var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-            request.open('GET', url, false); // Open the request with synchronous mode
-            request.send(null); // Send the request with no additional data
+            try {
+                var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+                request.open('GET', url, false); // Open the request with synchronous mode
+                request.send(null); // Send the request with no additional data
         
-            if (request.status === 200) { // Check if the request was successful
-                return request.responseText; // Return the response text
-            } else {
-                return 'Error: ' + request.status; // Return an error message if the request failed
+                if (request.status === 200) { // Check if the request was successful
+                    return request.responseText; // Return the response text
+                } else {
+                    return 'Error: ' + request.status; // Return an error message if the request failed
+                }
+            } catch {
+                try {
+                    let http = require('http');
+                    let body = ""
+                    let request = http.get(url, function (res) {
+                        var data = '';
+                        res.on('data', function (chunk) {
+                            data += chunk;
+                        });
+                        res.on('end', function () {
+                            body = data.toString()
+                        });
+                    });
+                    request.on('error', function (e) {
+                        body = e.message
+                    });
+                    request.end();
+                    return body;
+                } catch {
+                    return "Unknown error fetching URL! :'("
+                }
             }
         }
+
         require(jsURI) {
             try {
                 let req = JSPlusPlus.JSPlusPlus.readInternetText(jsURI);
@@ -445,7 +470,5 @@ class JSPlusPlus {
             JSPlusPlus.General.require("https://cdn.jsdelivr.net/npm/gun/gun.js")
             return Gun(relays)
         }
-        
-        
     }
 }
