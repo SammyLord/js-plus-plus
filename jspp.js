@@ -24,8 +24,8 @@ class JSPlusPlus {
                 }
             }
 
-            // Constructor Extras BEGIN
-            enableJSConstructorExtras() {
+            // Constructor Helpers BEGIN
+            enableJSConstructorHelpers() {
                 Date.prototype.toUSADateString = function() {
                     let day = this.getDate().toString().padStart(2, '0');
                     let month = (this.getMonth() + 1).toString().padStart(2, '0');
@@ -255,7 +255,7 @@ class JSPlusPlus {
                 };
                 console.log("Javascript Extras Enabled!")
             }
-            // Constructor Extras END
+            // Constructor Helpers END
         }
 
         static Debug = class {
