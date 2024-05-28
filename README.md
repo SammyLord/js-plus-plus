@@ -1,3 +1,3 @@
-# Frontend JS
+# JS++
 
-A framework that makes writing frontends easier.
+Extending javascript.
