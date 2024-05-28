@@ -1,3 +1,6 @@
+// Created by Samuel Lord (NodeMixaholic/Sparksammy)
+// Now Maintained by Sneed Group
+// Licensed under Samuel Public License with <3
 class JSPlusPlus {
     General = class {
         //Eval alternative
@@ -19,10 +22,6 @@ class JSPlusPlus {
         }
     }
     Frontend = class {
-        // Created by Samuel Lord (NodeMixaholic/Sparksammy)
-        // Now Maintained by Maxwell (GOrwell1984)
-        // Licensed under Samuel Public License with <3
-        
         // Get element by ID
         getElementById(elementID) {
           return document.getElementById(elementID)
