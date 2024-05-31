@@ -335,7 +335,7 @@ class JSPlusPlus {
 
         require(jsURI) {
             let gen = new JSPlusPlus.General
-	    gen.readInternetText(jsURI);
+	    let req = gen.readInternetText(jsURI);
             gen.exec(req);
         }
 
