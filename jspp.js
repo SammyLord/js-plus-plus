@@ -18,15 +18,13 @@ class JSPlusPlus {
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
-		    let toxics = []
+		    var per = ""
 	            toxicity.load(threshold).then(model => {
 		            model.classify(sentences).then(predictions => {
-			            predictions.forEach(classified => {
-					            toxics = classified.results.match
-			            });
+			            console.log(predictions)
+				    per = predictions
 		            });
 	            });
-		    return toxics;
             }
             
             async asyncSleep(ms) {
