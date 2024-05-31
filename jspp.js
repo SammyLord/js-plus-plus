@@ -508,7 +508,7 @@ class JSPlusPlus {
         }
         
         createButton(elementID, text, attributes = {}) {
-          let elem = createElement("button", elementID);
+          let elem = htmlFront.createElement("button", elementID);
           elem.innerText = `${text}`
           for (const [name, value] of Object.entries(attributes)) {
             elem.setAttribute(name, value);
