@@ -348,6 +348,7 @@ class JSPlusPlus {
 
     }
     static HTMLFrontend = class {
+	const htmlFront = new JSPlusPlus.HTMLFrontend
         // Get element by ID
         getElementById(elementID) {
           return document.getElementById(elementID)
@@ -450,11 +451,11 @@ class JSPlusPlus {
         }
         
         createDiv(elementID) {
-          createElement("div", elementID);
+          htmlFront.createElement("div", elementID);
         }
         
         createParagraph(elementID, text) {
-          let elem = createElement("p", elementID);
+          let elem = htmlFront.createElement("p", elementID);
           elem.innerText = `${text}`
           return elem
         }
@@ -539,7 +540,7 @@ class JSPlusPlus {
         }
         
         createImage(elementID, src) {
-          return createElement("img", elementID, { src: src });
+          return htmlFront.createElement("img", elementID, { src: src });
         }
         
         // Get URL parameters
