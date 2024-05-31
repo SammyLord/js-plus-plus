@@ -335,9 +335,9 @@ class JSPlusPlus {
 
         require(jsURI) {
             try {
-                let jspp = new JSPlusPlus
-		jspp.readInternetText(jsURI);
-                jspp.exec(req);
+                let gen = new JSPlusPlus.General
+		gen.readInternetText(jsURI);
+                gen.exec(req);
             } catch {
                 console.log(`Error! (Using Node.JS/Bun?)
                 
