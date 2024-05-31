@@ -2,6 +2,9 @@
 // Created by Samuel Lord (NodeMixaholic/Sparksammy)
 // Now Maintained by Sneed Group
 // Licensed under Samuel Public License with <3
+
+const pp = new JSPlusPlus
+const htmlFront = new JSPlusPlus.HTMLFrontend
 class JSPlusPlus {
     static General = class {
 
@@ -11,7 +14,6 @@ class JSPlusPlus {
             }
 
         isToxic(sentences) {
-                let pp = new JSPlusPlus
 	            // Load the model. Users optionally pass in a threshold and an array of
 	            // labels to include.
                     pp.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
@@ -348,7 +350,6 @@ class JSPlusPlus {
 
     }
     static HTMLFrontend = class {
-	htmlFront = new JSPlusPlus.HTMLFrontend
         // Get element by ID
         getElementById(elementID) {
           return document.getElementById(elementID)
