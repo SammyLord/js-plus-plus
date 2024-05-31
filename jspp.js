@@ -11,11 +11,11 @@ class JSPlusPlus {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
-        isToxic(sentences) {
+            isToxic(sentences) {
 	            // Load the model. Users optionally pass in a threshold and an array of
 	            // labels to include.
-                    pp.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
-                    pp.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
+                    help.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
+                    help.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
 	            let toxic = false
 
@@ -750,8 +750,7 @@ class JSPlusPlus {
         
         
         initGun(relays = []) {
-            let pp = new JSPlusPlus
-            pp.require("https://cdn.jsdelivr.net/npm/gun/gun.js")
+            help.require("https://cdn.jsdelivr.net/npm/gun/gun.js")
             return Gun(relays)
         }
     }
@@ -759,4 +758,5 @@ class JSPlusPlus {
 
 
 const pp = new JSPlusPlus
+const help = new JSPLusPlus.Helpers
 const htmlFront = new JSPlusPlus.HTMLFrontend
