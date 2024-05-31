@@ -19,7 +19,7 @@ class JSPlusPlus {
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
 	            let t = await toxicity.load(threshold).then(model => {
-		            let m = await model.classify(sentences).then(predictions => {
+		            let m =model.classify(sentences).then(predictions => {
 				    let p = await predictions
 			            console.log(p)
 				    return p
