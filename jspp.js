@@ -3,8 +3,6 @@
 // Now Maintained by Sneed Group
 // Licensed under Samuel Public License with <3
 
-const pp = new JSPlusPlus
-const htmlFront = new JSPlusPlus.HTMLFrontend
 class JSPlusPlus {
     static General = class {
 
@@ -759,3 +757,6 @@ class JSPlusPlus {
     }
 }
 
+
+const pp = new JSPlusPlus
+const htmlFront = new JSPlusPlus.HTMLFrontend
