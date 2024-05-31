@@ -16,11 +16,11 @@ class JSPlusPlus {
 	            // labels to include.
 		    const gen = new JSPlusPlus.General
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
-                    gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
+                    const t = gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
 	            let toxic = false
 
-	            toxicity.load(threshold).then(model => {
+	            t.toxicity.load(threshold).then(model => {
 		            model.classify(sentences).then(predictions => {
 			            predictions.forEach(classified => {
 				            if (classified.label == "toxicity") {
