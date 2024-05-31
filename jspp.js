@@ -18,11 +18,10 @@ class JSPlusPlus {
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
-		    var per = ""
-	            toxicity.load(threshold).then(model => {
-		            model.classify(sentences).then(predictions => {
+	            return toxicity.load(threshold).then(model => {
+		            return model.classify(sentences).then(predictions => {
 			            console.log(predictions)
-				    per = predictions
+				    return predictions
 		            });
 	            });
             }
