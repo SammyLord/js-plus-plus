@@ -10,7 +10,7 @@ class JSPlusPlus {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
-            function isToxic(sentences) {
+        isToxic(sentences) {
                 let pp = new JSPlusPlus
 	            // Load the model. Users optionally pass in a threshold and an array of
 	            // labels to include.
