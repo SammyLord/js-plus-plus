@@ -16,11 +16,11 @@ class JSPlusPlus {
 	            // labels to include.
 		    const gen = new JSPlusPlus.General
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
-                    const t = gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
+                    gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
 	            let toxic = false
 
-	            t.toxicity.load(threshold).then(model => {
+	            toxicity.load(threshold).then(model => {
 		            model.classify(sentences).then(predictions => {
 			            predictions.forEach(classified => {
 				            if (classified.label == "toxicity") {
@@ -335,9 +335,9 @@ class JSPlusPlus {
 
         require(jsURI) {
             try {
-                let req = JSPlusPlus.JSPlusPlus.readInternetText(jsURI);
-		let gen = new JSPlusPlus.General
-                gen.exec(req);
+                let jspp = new JSPlusPlus
+		jspp.readInternetText(jsURI);
+                jspp.exec(req);
             } catch {
                 console.log(`Error! (Using Node.JS/Bun?)
                 
