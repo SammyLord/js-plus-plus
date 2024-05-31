@@ -11,7 +11,7 @@ class JSPlusPlus {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
-            isToxic(sentences) {
+            async isToxic(sentences) {
 	            // Load the model. Users optionally pass in a threshold and an array of
 	            // labels to include.
 		    const gen = new JSPlusPlus.General
