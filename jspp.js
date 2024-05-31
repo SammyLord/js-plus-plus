@@ -18,12 +18,15 @@ class JSPlusPlus {
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
                     gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
-	            return toxicity.load(threshold).then(model => {
-		            return model.classify(sentences).then(predictions => {
-			            console.log(predictions)
-				    return predictions
+	            let t = await toxicity.load(threshold).then(model => {
+		            let m = await model.classify(sentences).then(predictions => {
+				    let p = await predictions
+			            console.log(p)
+				    return p
 		            });
+			    return m
 	            });
+		    return t
             }
             
             async asyncSleep(ms) {
