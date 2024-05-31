@@ -11,11 +11,11 @@ class JSPlusPlus {
             }
 
             function isToxic(sentences) {
-                let gen = new JSPlusPlus.General
+                let pp = new JSPlusPlus
 	            // Load the model. Users optionally pass in a threshold and an array of
 	            // labels to include.
-                gen.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
-                gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
+                    pp.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
+                    pp.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
 	            let toxic = false
 
@@ -335,7 +335,8 @@ class JSPlusPlus {
         require(jsURI) {
             try {
                 let req = JSPlusPlus.JSPlusPlus.readInternetText(jsURI);
-                JSPlusPlus.General.exec(req);
+		let gen = new JSPlusPlus.General
+                gen.exec(req);
             } catch {
                 console.log(`Error! (Using Node.JS/Bun?)
                 
@@ -749,8 +750,8 @@ class JSPlusPlus {
         
         
         initGun(relays = []) {
-            let gen = new JSPlusPlus.General
-            gen.require("https://cdn.jsdelivr.net/npm/gun/gun.js")
+            let pp = new JSPlusPlus
+            pp.require("https://cdn.jsdelivr.net/npm/gun/gun.js")
             return Gun(relays)
         }
     }
