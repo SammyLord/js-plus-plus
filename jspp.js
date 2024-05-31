@@ -348,7 +348,7 @@ class JSPlusPlus {
 
     }
     static HTMLFrontend = class {
-	const htmlFront = new JSPlusPlus.HTMLFrontend
+	htmlFront = new JSPlusPlus.HTMLFrontend
         // Get element by ID
         getElementById(elementID) {
           return document.getElementById(elementID)
