@@ -14,6 +14,7 @@ class JSPlusPlus {
             isToxic(sentences) {
 	            // Load the model. Users optionally pass in a threshold and an array of
 	            // labels to include.
+		    const help = new JSPlusPlus.General.Helpers
                     help.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
                     help.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
@@ -450,11 +451,13 @@ class JSPlusPlus {
         }
         
         createDiv(elementID) {
+	  const htmlFront = new JSPlusPlus.HTMLFrontend
           htmlFront.createElement("div", elementID);
         }
         
         createParagraph(elementID, text) {
-          let elem = htmlFront.createElement("p", elementID);
+          const htmlFront = new JSPlusPlus.HTMLFrontend;
+	  let elem = htmlFront.createElement("p", elementID);
           elem.innerText = `${text}`
           return elem
         }
@@ -507,7 +510,7 @@ class JSPlusPlus {
         }
         
         createButton(elementID, text, attributes = {}) {
-          let elem = htmlFront.createElement("button", elementID);
+          const htmlFront = new JSPlusPlus.HTMLFrontend; let elem = htmlFront.createElement("button", elementID);
           elem.innerText = `${text}`
           for (const [name, value] of Object.entries(attributes)) {
             elem.setAttribute(name, value);
@@ -539,6 +542,7 @@ class JSPlusPlus {
         }
         
         createImage(elementID, src) {
+	  const htmlFront = new JSPlusPlus.HTMLFrontend;
           return htmlFront.createElement("img", elementID, { src: src });
         }
         
@@ -750,13 +754,9 @@ class JSPlusPlus {
         
         
         initGun(relays = []) {
+	    const help = new JSPlusPlus.General.Helpers
             help.require("https://cdn.jsdelivr.net/npm/gun/gun.js")
             return Gun(relays)
         }
     }
 }
-
-
-const pp = new JSPlusPlus
-const help = new JSPLusPlus.Helpers
-const htmlFront = new JSPlusPlus.HTMLFrontend
