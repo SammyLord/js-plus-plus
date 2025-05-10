@@ -1,7 +1,6 @@
 // JS++
-// Created by Samuel Lord (NodeMixaholic/Sparksammy)
-// Now Maintained by Sneed Group
-// Licensed under Samuel Public License with <3
+// Created by Sammy Lord (NodeMixaholic/Sparksammy)
+// Licensed under Sammy Public License with <3
 
 class JSPlusPlus {
     static General = class {
@@ -11,19 +10,107 @@ class JSPlusPlus {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
+             interpretBrainfuck(code) {
+    const memory = new Array(30000).fill(0); // Memory tape of 30,000 cells, initialized to 0
+    let pointer = 0; // Data pointer
+    let codePointer = 0; // Code pointer
+    const output = [];
+    
+    // Input handling: A simple function to get one character from the user
+    function  getInput() {
+        const input = prompt("Enter a character (for Brainfuck input):");
+        return input ? input.charCodeAt(0) : 0; // Returns the ASCII value of the character, or 0 if cancelled
+    }
+
+    while (codePointer < code.length) {
+        const command = code[codePointer];
+
+        switch (command) {
+            case '>':
+                pointer++;
+                break;
+            case '<':
+                pointer--;
+                break;
+            case '+':
+                memory[pointer]++;
+                break;
+            case '-':
+                memory[pointer]--;
+                break;
+            case '.':
+                output.push(String.fromCharCode(memory[pointer])); // Output the character at the current pointer
+                break;
+            case ',':
+                memory[pointer] = getInput(); // Read input from the user and store it in memory[pointer]
+                break;
+            case '[':
+                if (memory[pointer] === 0) {
+                    let openBrackets = 1;
+                    while (openBrackets !== 0) {
+                        codePointer++;
+                        if (code[codePointer] === '[') openBrackets++;
+                        if (code[codePointer] === ']') openBrackets--;
+                    }
+                }
+                break;
+            case ']':
+                if (memory[pointer] !== 0) {
+                    let closeBrackets = 1;
+                    while (closeBrackets !== 0) {
+                        codePointer--;
+                        if (code[codePointer] === '[') closeBrackets--;
+                        if (code[codePointer] === ']') closeBrackets++;
+                    }
+                }
+                break;
+        }
+
+        codePointer++;
+    }
+
+    return output.join('');
+}
+
             async isToxic(sentences) {
 	            // Load the model. Users optionally pass in a threshold and an array of
 	            // labels to include.
-		    const gen = new JSPlusPlus.General
-                    gen.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
-                    gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
+		          const gen = new JSPlusPlus.General
+              gen.require("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")
+              gen.require("https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity")
 	            let threshold = 0.9;
 	            let t = await toxicity.load(threshold).then(model => {
 		            return model.classify(sentences).then(predictions => {
 			            return predictions
 		            });
 	            });
-		    return t
+		          return t
+            }
+
+            isPrime = num => {
+              for(let i = 2, s = Math.sqrt(num); i <= s; i++) {
+                  if(num % i === 0) return false;
+              }
+              return num > 1;
+            }
+          
+            sieve(siveTo) {
+              const helpers = new JSPlusPlus.General.Helpers
+              const isPrime = helpers.isPrime
+              let primes = []
+              siveTo = Number(siveTo)
+          
+              for (var i = 1; i < siveTo; i++) {
+                  if (isPrime(i)) {
+                          primes.push(i)
+                  }
+              }
+          
+              if (isPrime(siveTo)) {
+                  primes.push(siveTo)
+              }
+          
+              return primes
             }
             
             async asyncSleep(ms) {
